@@ -1,108 +1,136 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Te Amo Matrix</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I Love You Card</title>
   <style>
-    html, body {
+    body {
       margin: 0;
       padding: 0;
-      overflow: hidden;
-      background-color: black;
-      font-family: Arial, sans-serif;
+      height: 100vh;
+      background: #c2c2c2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Arial', sans-serif;
     }
-    canvas {
-      display: block;
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 0;
+
+    .container {
+      display: flex;
+      align-items: center;
+      background: #ffdbe6;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
     }
-    .center-text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: #ff69b4;
+
+    .message {
+      max-width: 300px;
+      margin-right: 40px;
+      color: #b30059;
       font-size: 24px;
-      text-align: center;
-      padding: 20px;
-      z-index: 1;
-      max-width: 90%;
-      line-height: 1.5;
-      text-shadow: 0 0 10px #ff69b4, 0 0 20px #ff69b4;
+      font-weight: bold;
+    }
+
+    .card {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      background: #ffb6c1;
+      border-radius: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    .card::before {
+      content: "\2764";
+      font-size: 60px;
+      color: #ff3366;
+      animation: pulse 1.5s infinite;
+    }
+
+    .text {
+      position: absolute;
+      bottom: -40px;
+      font-size: 24px;
+      color: #ff4d88;
+      font-weight: bold;
+    }
+
+    .hearts {
+      position: absolute;
+      bottom: 50%;
+      display: flex;
+      gap: 10px;
+    }
+
+    .heart {
+      width: 15px;
+      height: 15px;
+      background-color: #ff3366;
+      transform: rotate(45deg);
+      animation: rise 3s infinite ease-in;
+      opacity: 0;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      background-color: #ff3366;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -7.5px;
+      left: 0;
+    }
+
+    .heart::after {
+      top: 0;
+      left: -7.5px;
+    }
+
+    @keyframes rise {
+      0% {
+        transform: translateY(0) scale(1) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-150px) scale(1.2) rotate(45deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
     }
   </style>
 </head>
 <body>
-<canvas id="loveCanvas"></canvas>
-
-<div class="center-text">
-  Você é a coisa mais incrível que já aconteceu na minha vida.<br>
-  Meus dias com vc são mais felizes.<br>
-  Te amo minha princesa 💖
-</div>
-
-<script>
-  const canvas = document.getElementById("loveCanvas");
-  const ctx = canvas.getContext("2d");
-
-  // Ajustar tamanho do canvas
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-
-  const columns = 5;
-  const fontSize = 22;
-  const columnWidth = canvas.width / columns;
-  const drops = Array(columns).fill(0);
-
-  function drawParticles(x, y) {
-    for (let i = 0; i < 10; i++) {
-      const size = Math.random() * 3 + 1;
-      const offsetX = (Math.random() - 0.5) * 20;
-      const offsetY = (Math.random() - 0.5) * 20;
-      const alpha = 0.8;
-      ctx.beginPath();
-      ctx.arc(x + offsetX, y + offsetY, size, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(255, 105, 180, ${alpha})`;
-      ctx.fill();
-    }
-  }
-
-  function draw() {
-    ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    ctx.font = `${fontSize}px Arial`;
-    ctx.textAlign = "center";
-
-    for (let i = 0; i < columns; i++) {
-      const text = "Te Amo";
-      const x = i * columnWidth + columnWidth / 2;
-      const y = drops[i] * fontSize;
-
-      ctx.fillStyle = "#ff69b4";
-      ctx.fillText(text, x, y);
-
-      if (Math.random() > 0.985) {
-        drawParticles(x, y);
-      }
-
-      if (y > canvas.height || Math.random() > 0.99) {
-        drops[i] = 0;
-      }
-
-      drops[i]++;
-    }
-  }
-
-  setInterval(draw, 60);
-
-  window.addEventListener("resize", () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  });
-</script>
+  <div class="container">
+    <div class="message">
+      Oi meu amor, eu não gosto de fazer cartas a mão, por isso que montei um site pra vc kkkk.<br>
+      <br>
+     Eu queria dizer que o meu amor por vc é enorme. Desde que você entrou na minha vida ela mudou pra melhor.<br>
+     <br>
+      Cada dia que passa meu amor por você cresce, cada vez que eu te vejo eu te admiro mais. Amo nossa relação, eu te amo, eu amo o que nós temos. 
+    </div>
+    <div class="card">
+      <div class="text">I Love You!</div>
+      <div class="hearts">
+        <div class="heart" style="animation-delay: 0s"></div>
+        <div class="heart" style="animation-delay: 0.5s"></div>
+        <div class="heart" style="animation-delay: 1s"></div>
+        <div class="heart" style="animation-delay: 1.5s"></div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
